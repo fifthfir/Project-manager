@@ -1,30 +1,73 @@
 package com.example.springboot.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
-@TableName(value = "sys_user")
-@Data  // setter, getter, toString
-public class User {
-    @TableId(type = IdType.AUTO)
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author Ruotian
+ * @since 2024-02-13
+ */
+@Getter
+@Setter
+@TableName("sys_user")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    /**
+     * username
+     */
     private String username;
 
-    @JsonIgnore  // Hide the password at frontend
+    /**
+     * password
+     */
     private String password;
 
+    /**
+     * email	nickname
+     */
     private String nickname;
+
+    /**
+     * email
+     */
     private String email;
+
+    /**
+     * phone
+     */
     private String phone;
+
+    /**
+     * address
+     */
     private String address;
 
-    @TableField(value = "avatar_url")
-    private String avatar;
+    /**
+     * time when create
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * avatar
+     */
+    private String avatarUrl;
+
+
 }

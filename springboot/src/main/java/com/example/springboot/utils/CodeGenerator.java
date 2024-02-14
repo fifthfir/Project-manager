@@ -34,7 +34,7 @@ public class CodeGenerator {
                 builder.entityBuilder().enableLombok();
                 builder.mapperBuilder().enableMapperAnnotation().build();
                 builder.controllerBuilder().enableHyphenStyle()  // 开启驼峰转连字符
-                    .enableRestStyle();  // 开启生成@RestController 控制器
+                    .enableRestStyle();  // 开启生成 @RestController 控制器
                 builder.addInclude("sys_user") // 设置需要生成的表名
                     .addTablePrefix("sys_"); // 设置过滤表前缀
             })
