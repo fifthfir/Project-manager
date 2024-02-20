@@ -21,8 +21,17 @@
                     >
                 <el-button type="danger" slot="reference">Muti-Delete <i class="el-icon-remove-outline"></i></el-button>
             </el-popconfirm>
+
+            <el-upload
+                action="http://localhost:9090/user/import"
+                :show-file-list="false"
+                accept=".xlsx"
+                :on-success="handleExcelImportSuccess"
+                style="display: inline-block">
             <el-button type="primary" class="ml-5">Import <i class="el-icon-bottom"></i></el-button>
-            <el-button type="primary">Export <i class="el-icon-top"></i></el-button>
+            </el-upload>
+
+            <el-button type="primary" @click="exp" class="ml-5">Export <i class="el-icon-top"></i></el-button>
         </div>
 
         <el-table :data="tableData" border strip header-cell-class-name="headerBg" @selection-change="handleSelectionChange">
@@ -97,7 +106,7 @@ export default {
             tableData: [],
             total: 0,
             pageNum: 1,
-            pageSize: 5,
+            pageSize: 10,
             username: "",
             email: "",
             address: "",
@@ -153,7 +162,7 @@ export default {
         delBatch() {
             let ids = this.multipleSelection.map(v => v.id)
             this.request.post("/user/del/batch", ids).then(res =>{
-                if (res) {
+                if (res.data) {
                     this.$message.success("Delete successed")
                     this.load()
                 } else {
@@ -164,7 +173,7 @@ export default {
 
         save() {
             this.request.post("/user", this.form).then(res => {
-                if (res) {
+                if (res.data) {
                     this.$message.success("Save successed")
                     this.dialogFormVisible = false
                     this.load()
@@ -184,10 +193,10 @@ export default {
                     address: this.address
                 }
             }).then(res => {
-                console.log(res)
-
-                this.tableData = res.records
-                this.total = res.total
+							if (res.data) {  // wow I debug by myself
+								this.tableData = res.data.records
+                this.total = res.data.total
+							}
             })
         },
 
@@ -195,6 +204,15 @@ export default {
             this.username = ""
             this.email = ""
             this.address = ""
+            this.load()
+        },
+
+        exp() {
+            window.open("http://localhost:9090/user/export")
+        },
+
+        handleExcelImportSuccess() {
+            this.$message.success("Import successfully")
             this.load()
         }
     }

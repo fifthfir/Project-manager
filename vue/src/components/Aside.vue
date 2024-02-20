@@ -13,7 +13,7 @@
         <el-menu-item index="/">
             <template slot="title">
                 <i class="el-icon-house"></i>
-                <span slot="title">Home</span>
+                <span>Home</span>
             </template>
         </el-menu-item>
 
