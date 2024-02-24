@@ -32,7 +32,8 @@ export default {
 	name: "Header",
 	props: {
 			collapseBtnClass: String,
-			collpase: Function
+			collpase: Function,
+			user: Object
 	},
 
 	computed: {
@@ -46,7 +47,7 @@ export default {
 	},
 	data() {
 		return {
-			user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
+			// user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
 		}
 	},
 	methods: {

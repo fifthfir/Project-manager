@@ -26,6 +26,18 @@
                 <i class="el-icon-s-custom"></i>
                 <span>User Manage</span>
             </el-menu-item>
+						<el-menu-item index="role">
+                <i class="el-icon-s-custom"></i>
+                <span>Role Manage</span>
+            </el-menu-item>
+						<el-menu-item index="menu">
+                <i class="el-icon-s-custom"></i>
+                <span>Menu Manage</span>
+            </el-menu-item>
+						<el-menu-item index="file">
+                <i class="el-icon-document"></i>
+                <span>File Manage</span>
+            </el-menu-item>
         </el-submenu>
 
     </el-menu>

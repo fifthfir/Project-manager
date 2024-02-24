@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -62,12 +63,17 @@ public class User implements Serializable {
     /**
      * time when create
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * avatar
      */
     private String avatarUrl;
+
+    /**
+     * role
+     */
+    private String role;
 
     @Override
     public String toString() {
