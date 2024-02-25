@@ -16,6 +16,9 @@
             <span>{{ user.nickname }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
 					</div>
             <el-dropdown-menu slot="dropdown" style="width: 70px; text-align: center">
+								<el-dropdown-item style="font-size: 14px; padding: 5px 0">
+									<router-link to="/password" style="text-decoration: none">Modify Password</router-link>
+								</el-dropdown-item>
                 <el-dropdown-item style="font-size: 14px; padding: 5px 0">
 									<router-link to="/person" style="text-decoration: none">Person</router-link>
 								</el-dropdown-item>
@@ -52,8 +55,7 @@ export default {
 	},
 	methods: {
 		logout() {
-			this.$router.push("/login")
-			localStorage.removeItem("user")
+			this.$store.commit("logout")
 			this.$message.success("Log out successfully")
 		}
 	}

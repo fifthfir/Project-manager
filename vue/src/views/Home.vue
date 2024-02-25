@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-row gutter="10" style="margin-bottom: 80px; margin-top: 20px">
+		<el-row :gutter=10 style="margin-bottom: 80px; margin-top: 20px">
 		  <el-col :span="6">
 				<el-card style="color: #409eff ;">
 					<div>
@@ -48,7 +48,7 @@
 
 		<el-row>
 			<el-col :span="12">
-				<div id="main" style="width: 450px; height: 500px; margin-left: 40px;"></div>
+				<div id="main" style="width: 500px; height: 500px; margin-left: 40px;"></div>
 			</el-col>
 
 			<el-col :span="12">

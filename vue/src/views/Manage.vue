@@ -1,20 +1,21 @@
 <template>
-    <el-container style="min-height: 100vh">
-        <el-aside :width="sideWidth + 'px'" style="background-color: rgb(238, 241, 246); box-shadow: 2px 0 6px rgb(195, 212, 235);">
-            <Aside :isCollapsed="isCollapsed" />
-        </el-aside>
+	<el-container style="min-height: 100vh">
 
-        <el-container>
-            <el-header style="border-bottom: 1px solid #ccc;">
-                <Header :collapseBtnClass="collapseBtnClass" :collpase="collpase" :user="user" />
-            </el-header>
+		<el-aside :width="sideWidth + 'px'" style="background-color: rgb(238, 241, 246); box-shadow: 2px 0 6px rgb(195, 212, 235);">
+			<Aside :isCollapsed="isCollapsed"/>
+		</el-aside>
 
-            <el-main>
-                <router-view @refreshUser="getUser" />
-            </el-main>
+		<el-container>
+			<el-header style="border-bottom: 1px solid #ccc;">
+				<Header :collapseBtnClass="collapseBtnClass" :collpase="collpase" :user="user" />
+			</el-header>
 
-        </el-container>
-    </el-container>
+			<el-main>
+				<router-view @refreshUser="getUser" />
+			</el-main>
+
+		</el-container>
+	</el-container>
 </template>
 
 <script>
@@ -26,10 +27,10 @@ export default {
   name: 'Home',
   data() {
     return {
-        collapseBtnClass: 'el-icon-s-fold',
-        isCollapsed: false,
-        sideWidth: 200,
-				user: {}
+			collapseBtnClass: 'el-icon-s-fold',
+			isCollapsed: false,
+			sideWidth: 200,
+			user: {},
     }
   },
 

@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import {setRoutes} from "@/router";
+
 export default {
     name: "Login",
     data() {
@@ -49,6 +51,10 @@ export default {
             this.request.post("/user/login", this.user).then(res => {
               if (res.code === '200') {
 								localStorage.setItem("user", JSON.stringify(res.data))
+								localStorage.setItem("menus", JSON.stringify(res.data.menus))
+
+								setRoutes()
+
 								this.$router.push("/")
 								this.$message.success("Login successfully")
               } else {

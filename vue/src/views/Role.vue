@@ -80,7 +80,9 @@
 					node-key="id"
 					ref="tree"
 					:default-expanded-keys="expands"
-					:default-checked-keys="checks">
+					:default-checked-keys="checks"
+					:check-strictly="true"
+					>
 
 					<span class="custom-tree-node" slot-scope="{ node, data}">
 						<span><i :class="data.icon" />  {{ data.name }}</span>
@@ -116,7 +118,6 @@
 </template>
 
 <script>
-import { registerTheme } from 'echarts';
 
 export default {
 	name: "User",
@@ -165,6 +166,7 @@ export default {
 				if (res.code === '200') {
 					this.$message.success("Set successfully")
 					this.menuDialogVisible = false
+					// this.$store.commit("logout")
 				} else {
 					this.$message.error("res.msg")
 				}

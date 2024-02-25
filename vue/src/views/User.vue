@@ -83,7 +83,7 @@
 				<!-- Role select -->
 				<el-form-item label="role">
 					<el-select clearable v-model="form.role" placeholder="Please select" style="width: 100%">
-						<el-option v-for="item in roles" :key="item.flag" :label="item.name" :value="item.name">
+						<el-option v-for="item in roles" :key="item.name" :label="item.name" :value="item.flag">
 						</el-option>
 					</el-select>
 				</el-form-item>

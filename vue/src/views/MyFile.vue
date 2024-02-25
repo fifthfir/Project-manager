@@ -27,7 +27,7 @@
 			</el-popconfirm>
 		</div>
 
-		<el-table :data="tableData" border stripe :header-cell-class-name="headerBg" @selection-change="handleSelectionChange">
+		<el-table :data="tableData" border stripe @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column prop="id" label="ID" width="80"></el-table-column>
 			<el-table-column prop="name" label="file name"></el-table-column>
@@ -36,7 +36,6 @@
 			<el-table-column label="download">
 				<template slot-scope="scope">
 					<el-button type="primary" @click="window.open(scope.row.url)">Download</el-button>
-					<el-switch v-model="entity.row.enable" active-color="#13ce66" inactive-color="#ccc"></el-switch>
 				</template>
 			</el-table-column>
 			<el-table-column label="enable">
@@ -86,7 +85,8 @@ export default {
 			pageNum: 1,
 			pageSize: 10,
 			name: "",
-			multipleSelection: []
+			multipleSelection: [],
+			window: window
 		}
 	},
 

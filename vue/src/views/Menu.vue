@@ -31,6 +31,7 @@
 				<el-table-column prop="id" label="ID" width="80"></el-table-column>
 				<el-table-column prop="name" label="Name"></el-table-column>
 				<el-table-column prop="path" label="Path"></el-table-column>
+				<el-table-column prop="pagePath" label="Page Path"></el-table-column>
 
 				<el-table-column prop="icon" label="Icon">
 					<template slot-scope="scope">
@@ -79,6 +80,10 @@
 						<el-form-item label="path">
 							<el-input v-model="form.path" autocomplete="off"></el-input>
 						</el-form-item>
+						<el-form-item label="Page Path">
+							<el-input v-model="form.pagePath" autocomplete="off"></el-input>
+						</el-form-item>
+
 
 						<!-- Icon -->
 						<el-form-item label="icon">

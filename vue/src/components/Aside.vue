@@ -1,59 +1,59 @@
 <template>
-    <el-menu :default-openeds="['1', '3']" style="height: 100vh; overflow: hidden"
-                active-text-color="#099fff"
-                :collapse-transition="false"
-                :collapse="isCollapsed"
-                router
-                >
-        <div style="height: 60px; line-height: 60px; text-align: center">
-            <img src="../assets/logo.png" alt="" style="width: 20px; position: relative; top: 5px;">
-            <b v-show="!isCollapsed" style=" margin-left: 5px;">Dashboard</b>
-        </div>
+	<el-menu :default-openeds="opens" style="height: 100vh; overflow: hidden"
+		active-text-color="#099fff"
+		:collapse-transition="false"
+		:collapse="isCollapsed"
+		router
+		>
+		<div style="height: 60px; line-height: 60px; text-align: center">
+				<img src="../assets/logo.png" alt="" style="width: 20px; position: relative; top: 5px;">
+				<b v-show="!isCollapsed" style=" margin-left: 5px;">Dashboard</b>
+		</div>
 
-        <el-menu-item index="/">
-            <template slot="title">
-                <i class="el-icon-house"></i>
-                <span>Home</span>
-            </template>
-        </el-menu-item>
+		<div v-for="item in menus" :key="item.id">
+			<div v-if="item.path">
+				<el-menu-item :index="item.path">
+					<i :class="item.icon"></i>
+					<span slot="title">{{ item.name }}</span>
+				</el-menu-item>
+			</div>
 
-        <el-submenu index="2">
-            <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span>System Manage</span>
-            </template>
-            <el-menu-item index="user">
-                <i class="el-icon-s-custom"></i>
-                <span>User Manage</span>
-            </el-menu-item>
-						<el-menu-item index="role">
-                <i class="el-icon-s-custom"></i>
-                <span>Role Manage</span>
-            </el-menu-item>
-						<el-menu-item index="menu">
-                <i class="el-icon-s-custom"></i>
-                <span>Menu Manage</span>
-            </el-menu-item>
-						<el-menu-item index="file">
-                <i class="el-icon-document"></i>
-                <span>File Manage</span>
-            </el-menu-item>
-        </el-submenu>
+			<div v-else>
+				<el-submenu :index="item.id + ''">
+					<template slot="title">
+						<i :class="item.icon"></i>
+						<span slot="title" v-show="!isCollapsed">{{ item.name }}</span>
+					</template>
 
-    </el-menu>
+					<div v-for="subItem in item.children" :key="subItem.id">
+						<el-menu-item :index="subItem.path">
+							<i :class="subItem.icon"></i>
+							<span slot="title">{{ subItem.name }}</span>
+						</el-menu-item>
+					</div>
+				</el-submenu>
+			</div>
+		</div>
+	</el-menu>
 </template>
 
 <script>
 export default {
-    name: "Aside",
-    props: {
-        isCollapsed: Boolean
-    },
+	name: "Aside",
+	props: {
+			isCollapsed: Boolean
+	},
 
-    methods: {
-        handleSelect(index) {
+	data() {
+		return {
+			menus: localStorage.getItem("menus") ? JSON.parse(localStorage.getItem("menus")) : [],
+			opens: localStorage.getItem("menus") ? JSON.parse(localStorage.getItem("menus")).map(v => v.id + '') : [],
+		}
+	},
 
-        }
-    }
+	methods: {
+		handleSelect(index) {
+		}
+	}
 }
 </script>
