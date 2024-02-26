@@ -158,6 +158,11 @@ export default {
 		handleAdd(pid) {
 			this.dialogFormVisible = true
 			this.form = {}
+
+			this.request.get("/menu/icons").then(res => {
+				this.options = res.data
+			})
+
 			if (pid) {
 				this.form.pid = pid
 			}
@@ -168,10 +173,7 @@ export default {
 				this.dialogFormVisible = true
 
 				this.request.get("/menu/icons").then(res => {
-
 					this.options = res.data
-					console.log(this.options)
-
 				})
 		},
 
@@ -214,8 +216,6 @@ export default {
 						}
 				})
 		},
-
-
 
 		reset(){
 				this.name = ""

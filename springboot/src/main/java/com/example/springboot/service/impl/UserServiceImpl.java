@@ -3,6 +3,7 @@ package com.example.springboot.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.common.Constants;
 import com.example.springboot.controller.dto.UserDTO;
 import com.example.springboot.entity.Menu;
@@ -33,6 +34,9 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     private static final Log LOG = Log.get();
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private RoleMapper roleMapper;
@@ -94,6 +98,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             throw new ServiceException(Constants.CODE_600, "Username already exists");
         }
         return null;
+    }
+
+    @Override
+    public Page<User> findPage(
+        Page<User> page,
+        String username,
+        String nickname,
+        String email,
+        String address) {
+        return userMapper.findPage(page, username, nickname, email, address);
     }
 
     private List<Menu> getRoleMenus(String roleFlag) {

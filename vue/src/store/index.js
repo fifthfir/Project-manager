@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import router from "@/router";
+import router, { resetRouter } from "@/router";
 
 Vue.use(Vuex)
 
@@ -14,9 +14,13 @@ const store = new Vuex.Store({
 		},
 
 		logout() {
+			// clear storage
 			localStorage.removeItem("user")
 			localStorage.removeItem("menus")
 			router.push("/login")
+
+			// reset routes
+			resetRouter()
 		}
 	}
 })

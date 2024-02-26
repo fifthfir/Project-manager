@@ -30,6 +30,15 @@ const router = new VueRouter({
   routes
 })
 
+export const resetRouter = () => {
+	router.matcher = new VueRouter({
+		mode: 'history',
+		base: process.env.BASE_URL,
+		routes
+	})
+}
+
+
 export const setRoutes = () => {
 	const storeMenus = localStorage.getItem("menus");
 

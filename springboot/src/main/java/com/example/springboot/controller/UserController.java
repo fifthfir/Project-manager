@@ -107,17 +107,17 @@ public class UserController {
                                 @RequestParam(defaultValue = "") String nickname,
                                 @RequestParam(defaultValue = "") String email,
                                 @RequestParam(defaultValue = "") String address) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("username", username);
-        queryWrapper.like("nickname", nickname);
-        queryWrapper.like("email", email);
-        queryWrapper.like("address", address);
-        queryWrapper.orderByDesc("id");
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like("username", username);
+//        queryWrapper.like("nickname", nickname);
+//        queryWrapper.like("email", email);
+//        queryWrapper.like("address", address);
+//        queryWrapper.orderByDesc("id");
+//
+//        User currentUser = TokenUtils.getCurrentUser();
+//        System.out.println("Current user: " + currentUser.getNickname());
 
-        User currentUser = TokenUtils.getCurrentUser();
-        System.out.println("Current user: " + currentUser.getNickname());
-
-        return Result.success(userService.page(new Page<>(pageNum, pageSize), queryWrapper));
+        return Result.success(userService.findPage(new Page<>(pageNum, pageSize), username, nickname, email, address));
     }
 
     @GetMapping("/export")
@@ -155,6 +155,13 @@ public class UserController {
         System.out.println(list);
         userService.saveBatch(list);
         return Result.success(true);
+    }
+
+    @GetMapping("/role/{role}")
+    public Result findUsersByRole(@PathVariable String role) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role", role);
+        return Result.success(userService.list(queryWrapper));
     }
 }
 

@@ -6,8 +6,8 @@
 		router
 		>
 		<div style="height: 60px; line-height: 60px; text-align: center">
-				<img src="../assets/logo.png" alt="" style="width: 20px; position: relative; top: 5px;">
-				<b v-show="!isCollapsed" style=" margin-left: 5px;">Dashboard</b>
+			<img src="../assets/logo.png" alt="" style="width: 20px; position: relative; top: 5px;">
+			<b v-show="!isCollapsed" style=" margin-left: 5px;">Dashboard</b>
 		</div>
 
 		<div v-for="item in menus" :key="item.id">
