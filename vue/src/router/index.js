@@ -18,6 +18,54 @@ const routes = [
   },
 
 	{
+    path: '/front',
+    name: 'Front',
+    component: () => import('../views/front/Front.vue'),
+		children: [
+			{
+				path: 'home',
+				name: 'FrontHome',
+				component: () => import('../views/front/Home.vue')
+			},
+			{
+				path: 'item1',
+				name: 'Item1',
+				component: () => import('../views/front/Item1.vue')
+			},
+			{
+				path: 'person',
+				name: 'FrontPerson',
+				component: () => import('../views/front/Person.vue')
+			},
+			{
+				path: 'password',
+				name: 'FrontPassword',
+				component: () => import('../views/front/Password.vue')
+			},
+			{
+				path: 'video',
+				name: 'Video',
+				component: () => import('../views/front/Video.vue')
+			},
+			{
+				path: 'videoDetail',
+				name: 'VideoDetail',
+				component: () => import('../views/front/VideoDetail.vue')
+			},
+			{
+				path: 'article',
+				name: 'FrontArticle',
+				component: () => import('../views/front/Article.vue')
+			},
+			{
+				path: 'articleDetail',
+				name: 'ArticleDetail',
+				component: () => import('../views/front/ArticleDetail.vue')
+			},
+		]
+  },
+
+	{
     path: '/404',
     name: '404',
     component: () => import('../views/404.vue')

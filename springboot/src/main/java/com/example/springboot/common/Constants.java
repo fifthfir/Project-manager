@@ -6,6 +6,7 @@ public interface Constants {
     String CODE_401 = "401"; // NO PERMISSION
     String CODE_400 = "400"; // WRONG ARGUMENT
     String CODE_600 = "400"; // OTHER ERROR
-
     String DICT_TYPE_ICON = "icon";
+    String FILES_KEY = "FILES_FRONT_ALL";
+
 }

@@ -7,6 +7,14 @@ spring:
     url: jdbc:mysql://localhost:3306/proj_manager?serverTimezone=GMT%2d8
     username: root
     password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 mybatis:
     mapper-locations: classpath:mapper/*.xml     # Scan all .xml file
 #    configuration:
@@ -18,4 +26,5 @@ mybatis-plus:
 files:
   upload:
     path: G:\proj-manager\files\
+
 

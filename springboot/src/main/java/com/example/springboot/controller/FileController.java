@@ -7,6 +7,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springboot.common.Constants;
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.MyFile;
 import com.example.springboot.entity.User;
@@ -20,7 +21,12 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +46,9 @@ public class FileController {
 
     @Resource
     private FileMapper fileMapper;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * File upload interface
@@ -80,6 +89,7 @@ public class FileController {
             saveFile.setMd5(md5);
             fileMapper.insert(saveFile);
         }
+//        flushRedis(Constants.FILES_KEY);
 
         return url;
     }
@@ -125,16 +135,27 @@ public class FileController {
             myFile.setIsDeleted(true);
             fileMapper.updateById(myFile);
         }
+//        flushRedis(Constants.FILES_KEY);
 
         return Result.success();
     }
 
     @DeleteMapping("/{id}")
+//    @CacheEvict(value = "files", key = "'frontAll'")
     public Result delete(@PathVariable Integer id) {
         MyFile myFile = fileMapper.selectById(id);
         myFile.setIsDeleted(true);
         fileMapper.updateById(myFile);
+//        flushRedis(Constants.FILES_KEY);
+
         return Result.success();
+    }
+
+    @GetMapping("/detail/{id}")
+//    @CacheEvict(value = "files", key = "'frontAll'")
+    public Result getById(@PathVariable Integer id) {
+        MyFile myFile = fileMapper.selectById(id);
+        return Result.success(myFile);
     }
 
     /**
@@ -154,14 +175,19 @@ public class FileController {
         queryWrapper.like("name", name);
         queryWrapper.orderByDesc("id");
 
-        User currentUser = TokenUtils.getCurrentUser();
-        System.out.println("Current user: " + currentUser.getNickname());
-
         return Result.success(fileMapper.selectPage(new Page<>(pageNum, pageSize), queryWrapper));
     }
 
     @PostMapping("/update")
+//    @CachePut(value = "files", key = "targetClass + methodName")  // "''frontAll"
     public Result save(@RequestBody MyFile myFile) {
-        return Result.success(fileMapper.updateById(myFile));
+        fileMapper.updateById(myFile);
+        fileMapper.selectList(null);
+//        flushRedis(Constants.FILES_KEY);
+        return Result.success();
+    }
+
+    private void flushRedis(String key) {
+        stringRedisTemplate.delete(Constants.FILES_KEY);
     }
 }

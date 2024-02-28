@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.springboot.common.Constants;
+import com.example.springboot.config.AuthAccess;
 import com.example.springboot.entity.User;
 import com.example.springboot.exception.ServiceException;
 import com.example.springboot.service.IUserService;
@@ -24,8 +25,14 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("token");
-        if (!(handler instanceof HandlerMethod)) {
+
+        if (!(handler instanceof HandlerMethod h)) {
             return true;
+        } else {
+            AuthAccess authAccess = h.getMethodAnnotation(AuthAccess.class);
+            if (authAccess != null) {
+                return true;
+            }
         }
 
         if (StrUtil.isBlank(token)) {

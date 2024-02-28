@@ -226,10 +226,6 @@ export default {
 				this.name = ""
 				this.load()
 		},
-
-		download(url) {
-			window.open(url)
-		}
 	}
 }
 

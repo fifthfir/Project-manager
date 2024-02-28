@@ -32,7 +32,7 @@
 			<el-table-column prop="description" label="Description"></el-table-column>
 			<el-table-column prop="flag" label="Flag"></el-table-column>
 
-			<el-table-column label="Action">
+			<el-table-column label="Action" width="330">
 				<template slot-scope="scope">
 
 					<!-- Set menu -->

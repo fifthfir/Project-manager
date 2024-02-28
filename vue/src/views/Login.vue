@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div style="margin: 200px auto; background-color: #fff; width: 350px; height: 270px; padding: 20px; border-radius: 5%;">
-      <div style="margin: 30px 0; text-align: center; font-size: 24px"><b>Login in</b></div>
+      <div style="margin: 30px 0; text-align: center; font-size: 24px"><b>Login</b></div>
       <el-form :model="user" :rules="rules" ref="userForm">
 
         <el-form-item prop="username">
@@ -54,9 +54,14 @@ export default {
 								localStorage.setItem("menus", JSON.stringify(res.data.menus))
 
 								setRoutes()
-
-								this.$router.push("/")
 								this.$message.success("Login successfully")
+
+								if (res.data.role === "ROLE_STUDENT") {
+									this.$router.push('/front/home')
+								} else {
+									this.$router.push('/')
+								}
+
               } else {
                 this.$message.error(res.msg)
               }
