@@ -1,10 +1,12 @@
 package com.example.springboot.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springboot.controller.dto.UserPasswordDTO;
 import com.example.springboot.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -22,4 +24,7 @@ public interface UserMapper extends BaseMapper<User> {
         @Param("nickname") String nickname,
         @Param("email") String email,
         @Param("address") String address);
+
+    @Update("update sys_user set password = #{newPassword} where username = #{username} and password = #{password}")
+    int updatePassword(UserPasswordDTO userPasswordDTO);
 }

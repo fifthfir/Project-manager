@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.common.Constants;
 import com.example.springboot.common.Result;
 import com.example.springboot.controller.dto.UserDTO;
+import com.example.springboot.controller.dto.UserPasswordDTO;
 import com.example.springboot.utils.TokenUtils;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
@@ -70,6 +71,12 @@ public class UserController {
     @PostMapping
     public Result save(@RequestBody User user) {
         return Result.success(userService.saveOrUpdate(user));
+    }
+
+    @PostMapping("/password")
+    public Result password(@RequestBody UserPasswordDTO userPasswordDTO) {
+        userService.updatePassword(userPasswordDTO);
+        return Result.success();
     }
 
     @PostMapping("/del/batch")

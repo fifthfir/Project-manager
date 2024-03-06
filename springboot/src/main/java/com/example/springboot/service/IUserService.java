@@ -3,6 +3,7 @@ package com.example.springboot.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.controller.dto.UserDTO;
+import com.example.springboot.controller.dto.UserPasswordDTO;
 import com.example.springboot.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -21,4 +22,6 @@ public interface IUserService extends IService<User> {
     UserDTO register(UserDTO userDTO);
 
     Page<User> findPage(Page<User> page, String username, String nickname, String email, String address);
+
+    void updatePassword(UserPasswordDTO userPasswordDTO);
 }

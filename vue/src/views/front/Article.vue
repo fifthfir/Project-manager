@@ -154,30 +154,6 @@ export default {
 			})
 		},
 
-		handleSelectionChange(val){
-			this.multipleSelection = val
-		},
-
-		delBatch() {
-			let ids = this.multipleSelection.map(v => v.id)
-			this.request.post("/article/del/batch", ids).then(res =>{
-				if (res.data) {
-					this.$message.success("Delete successed")
-					this.load()
-				} else {
-					this.$message.error("Delete failed")
-				}
-			})
-		},
-
-		changeEnable(row) {
-			this.request.post("/article", row).then(res => {
-				if (res.code === '200') {
-					this.$message.success("Update successfully")
-				}
-			})
-		},
-
 		reset(){
 				this.name = ""
 				this.load()
